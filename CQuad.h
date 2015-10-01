@@ -9,10 +9,7 @@ public:
 private:
 	bool ismouse_down;
 
-	float start_x;
-	float start_y;
-	float end_x;
-	float end_y;
+
 public:
 	void Draw();
 	void mouse(int button, int state, int x, int y);
@@ -35,6 +32,7 @@ CQuad::~CQuad()
 
 void CQuad::Draw()
 {
+	glColor3d(RGB[0], RGB[1], RGB[2]);
 	glBegin(GL_QUADS);
 		glVertex2f(start_x, start_y);
 		glVertex2f(start_x, end_y);

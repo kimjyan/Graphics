@@ -9,11 +9,6 @@ public:
 private:
 	bool ismouse_down;
 
-	float mouse_x;
-	float mouse_y;
-
-	float mosueMove_x;
-	float mouseMove_y;
 public:
 	void Draw();
 	void mouse(int button, int state, int x, int y);
@@ -22,11 +17,11 @@ public:
 
 CLine::CLine()
 {
-	mouse_x = 0; 
-	mouse_y = 0;
+	start_x = 0;
+	start_y = 0;
 
-	mosueMove_x = 0;
-	mouseMove_y = 0;
+	end_x = 0;
+	end_y = 0;
 
 	ismouse_down = false;
 }
@@ -37,9 +32,10 @@ CLine::~CLine()
 
 void CLine::Draw()
 {
-	glBegin(GL_LINES);
-		glVertex2d(mouse_x, mouse_y);
-		glVertex2d(mosueMove_x, mouseMove_y);
+	glColor3d(RGB[0], RGB[1], RGB[2]);
+		glBegin(GL_LINES);
+		glVertex2d(start_x, start_y);
+		glVertex2d(end_x, end_y);
 	glEnd();
 }
 
@@ -49,10 +45,10 @@ void CLine::mouse(int button, int state, int x, int y)
 	{
 		if (state == GLUT_DOWN)
 		{
-			mouse_x = x;
-			mouse_y = y;
-			mosueMove_x = x;
-			mouseMove_y = y;
+			start_x = x;
+			start_y = y;
+			end_x = x;
+			end_y = y;
 
 			ismouse_down = true;
 		}
@@ -67,7 +63,7 @@ void CLine::motion(int x, int y)
 {
 	if (ismouse_down)
 	{
-		mosueMove_x = x;
-		mouseMove_y = y;
+		end_x = x;
+		end_y = y;
 	}
 }
